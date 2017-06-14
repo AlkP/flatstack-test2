@@ -1,0 +1,14 @@
+%tr
+  %td= event.id
+  - if current_user.id == event.user_id
+    %td
+      = link_to event.name, edit_event_path(event)
+    %td
+      = link_to t('.del'),
+          event_path(event),
+          :method => :delete, 
+          :data => { :confirm => t('.confirm', name: event.name) }
+  - else
+    %td
+      = link_to event.name, event_path(event)
+    %td

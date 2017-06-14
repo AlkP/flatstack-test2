@@ -1,0 +1,26 @@
+= form_for @user, html: { class: 'form-horizontal', role: 'form' } do |f|
+
+  %div.form-group
+    %label.col-sm-4.control-label{ for: 'inputInitials' }
+      = t('.initials')
+    %div.col-sm-8
+      = f.text_field :initials, autofocus: true, :class => 'form-control', :id => "inputInitials", :type => "initials"
+  %div.form-group
+    %label.col-sm-4.control-label{ for: 'inputEmail' }
+      = t('.email')
+    %div.col-sm-8
+      = f.email_field :email, autofocus: true, :class => "form-control", :id => "inputEmai", :type => "email"
+  %div.form-group
+    %label.col-sm-4.control-label{ for: 'inputPassword' }
+      = t('.enter_password')
+    %div.col-sm-8
+      = f.email_field :password, autofocus: true, :class => "form-control", :id => "inputPassword", :type => "password"
+  %hr
+  %div.form-group
+    %label.col-sm-4.control-label{ for: 'inputStructureName' }
+    %div.col-sm-8
+      %button.btn.btn-default{ type: 'button', 'data-dismiss': 'modal' }
+        = link_to t('.close'), root_path
+      - if action_name != 'show'
+        %button.btn.btn-primary{ type: 'button submit' }
+          = t('.submit')

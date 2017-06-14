@@ -1,0 +1,23 @@
+
+%h1 
+  = t('.title') 
+  (
+  = link_to t('.new'), 
+            new_event_path,
+            title: t('.new_event')
+  )
+%br
+%table.table.table-striped
+  %thead
+    = render 'event_title'
+  %tbody.tbody-event
+    = render @events
+
+%br
+
+= paginate @events, :theme => 'twitter-bootstrap-3',
+                   :pagination_class => "pagination-sm"
+
+%br
+
+

@@ -1,0 +1,47 @@
+= form_for @event, html: { class: 'form-horizontal', role: 'form' } do |f|
+  %div.form-group
+    %label.col-sm-4.control-label{ for: 'inputName' }
+      = t('.name')
+    %div.col-sm-8
+      = f.text_field :name, autofocus: true, :class => "form-control", :id => "name", :type => "name"
+  %div.form-group
+    %label.col-sm-4.control-label{ for: 'inputDate' }
+      = t('.date')
+    %div.col-sm-8
+      = f.date_field :date, autofocus: false, :class => "form-control", :id => "date", :type => "date"
+  %div.form-group
+    %label.col-sm-4.control-label{ for: 'inputRepeat' }
+      = t('.repeat')
+    %div.col-sm-8
+      = check_box("event", "repeat", onclick: 'checkAll();' )
+  %div.form-group
+    %label.col-sm-4.control-label{  for: 'inputPeriod' }
+      = t('.period')
+    %div.col-sm-8
+      = f.select :period, Event.periods.keys, { include_blank: false, hide_label: true, :selected => @event.period }, {:class => "form-control"}
+  %div.modal-footer
+    %button.btn.btn-default{ type: 'button', 'data-dismiss': 'modal' }
+      = link_to t('.close'), root_path
+    - if action_name != 'show'
+      %button.btn.btn-primary{ type: 'button submit' }
+        = t('.submit')
+:javascript
+  function checkAll() {
+    if ($("#event_repeat")[0].checked) {
+      $("#event_period").parent().parent().show();
+    } else {
+      $("#event_period").parent().parent().hide();
+    }
+  }
+  function formShow() {
+    $("#name").attr('readonly', true);
+    $("#date").attr('readonly', true);
+    $("#event_repeat").attr('readonly', true);
+    $("#event_period").attr('readonly', true); 
+  }
+  checkAll();
+  
+  
+- if action_name == 'show'
+  :javascript
+    formShow()
